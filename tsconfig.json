@@ -13,7 +13,7 @@
     "target": "es6",
     "lib": ["es2018", "dom"],
     "paths": {
-      "form-effects": ["dist/form-effects/form-effects", "dist/form-effects"]
+      "@kbru/form-effects": ["projects/form-effects/src/public-api.ts"]
     }
   },
   "angularCompilerOptions": {
