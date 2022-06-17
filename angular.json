@@ -15,6 +15,7 @@
             "tsConfig": "projects/form-effects/tsconfig.lib.json",
             "project": "projects/form-effects/ng-package.json"
           },
+          "defaultConfiguration": "production",
           "configurations": {
             "production": {
               "tsConfig": "projects/form-effects/tsconfig.lib.prod.json"
