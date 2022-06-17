@@ -31,17 +31,19 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@angular-eslint/builder:lint",
                     "options": {
-                        "tsConfig": [
-                            "projects/form-effects/tsconfig.lib.json",
-                            "projects/form-effects/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "projects/form-effects/**/*.ts",
+                            "projects/form-effects/**/*.html"
+                        ]
                     }
                 }
             }
         }
     },
-    "defaultProject": "form-effects"
+    "defaultProject": "form-effects",
+    "cli": {
+        "defaultCollection": "@angular-eslint/schematics"
+    }
 }
