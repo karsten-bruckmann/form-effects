@@ -1,24 +1,80 @@
-# FormEffects
+# @kbru/form-effects
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.13.
+This library resulted from the wish to get the logic of complex Angular Reactive Forms out of the components. The goal is to have a Reactive Form, that can be tested without any components involved.
 
-## Code scaffolding
+A standard reactive `FormGroup` can be converted into an Observable, that (if subscribed to) will trigger all side effects that were provided when creating the form.
 
-Run `ng generate component component-name --project form-effects` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project form-effects`.
-> Note: Don't forget to add `--project form-effects` or else it will be added to the default project in your `angular.json` file. 
+# Installation
 
-## Build
+```bash
+npm install @kbru/form-effects
+```
 
-Run `ng build form-effects` to build the project. The build artifacts will be stored in the `dist/` directory.
+# Usage
 
-## Publishing
+## Create Form Effects
 
-After building your library with `ng build form-effects`, go to the dist folder `cd dist/form-effects` and run `npm publish`.
+A `FormEffect` is just a function getting the `FormGroup` and returning an `Observable<void>`. The Effect can then interact with the form (or other data sources).
 
-## Running unit tests
+**Example**
 
-Run `ng test form-effects` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```typescript
+let state$ = new BehaviourSubject<any>(null);
 
-## Further help
+// An effect that runs only once
+const setInitialValueEffect: FormEffect<FormGroup> = (form) => {
+    form.setValue(state$.value);
+    return EMPTY;
+};
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+// An effect that interacts with "external" data
+const saveOnChangeEffectA: FormEffect<FormGroup> = (form) =>
+    form.valueChanges.pipe(
+        map((value) => {
+            state.next(value);
+        })
+    );
+
+// Alternative for the above effect. Here, the external data source can
+// be mocked for testing.
+const saveOnChangeEffectB =
+    (state$: BehaviourSubject<any>): FormEffect<FormGroup> =>
+    (form) =>
+        form.valueChanges.pipe(
+            map((value) => {
+                state.next(value);
+            })
+        );
+```
+
+**Attention: Be sure not to create infinite Loops** with your Effects ;) If you create an effect based on the valueChanges of a form and set the values inside the effect, this is happens easily!
+
+## Attach Effects to the `FormGroup`
+
+For the effects to run they need to be attached to the `FormGroup`. Use `createEffectAwareForm` (which will return an `Observable<FormGroup>`).
+
+**Example**
+
+```typescript
+const form = new FormGroup({
+    foo: new FormControl(null),
+    // ...
+});
+const form$ = createEffectAwareForm(form, [effects]);
+```
+
+## Subscribing to the form
+
+For the effects to be run, the form returned by `createEffectAwareForm` needs to be subscribed. This can easily be done using the `async`-Pipe inside the Template:
+
+**Example**
+
+```html
+<form *ngIf="form$ | async as form" [formControl]="form">
+    <input formControlName="foo" />
+</form>
+```
+
+## Integration Tests for a form
+
+__TBD__
