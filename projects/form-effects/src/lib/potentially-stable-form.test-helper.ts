@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { combineLatest, Observable } from 'rxjs';
 import { debounceTime, mapTo, startWith, switchMap, tap } from 'rxjs/operators';
 
