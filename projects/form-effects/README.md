@@ -79,4 +79,4 @@ For the effects to be run, the form returned by `createEffectAwareForm` needs to
 
 Given you have your form set up only with effects and all logic completely independent from your components, you can easily write integration tests for your whole form logic.
 
-See [the tests in the demo app](../demo/src/app/core/form-builders/shipment/shipment.form-builder.spec.ts) for an example.
+See [the tests in the demo app](https://github.com/karsten-bruckmann/form-effects/blob/main/projects/demo/src/app/core/form-builders/shipment/shipment.form-builder.spec.ts) for an example.
