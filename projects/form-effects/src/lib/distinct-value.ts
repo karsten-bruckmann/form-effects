@@ -1,6 +1,6 @@
-import { AbstractControl } from "@angular/forms";
-import { merge, of } from "rxjs";
-import { distinctUntilChanged } from "rxjs/operators";
+import { AbstractControl } from '@angular/forms';
+import { merge, of } from 'rxjs';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 /**
  * Returns an Observable of the value of control starting with the current

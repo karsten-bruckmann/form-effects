@@ -1,7 +1,7 @@
-import { merge, Observable } from "rxjs";
-import { FormEffect } from "./form-effect.type";
-import { FormGroup } from "@angular/forms";
-import { map, share, startWith } from "rxjs/operators";
+import { merge, Observable } from 'rxjs';
+import { FormEffect } from './form-effect.type';
+import { FormGroup } from '@angular/forms';
+import { map, share, startWith } from 'rxjs/operators';
 
 export const createEffectAwareForm = <T extends FormGroup>(
   control: T,
