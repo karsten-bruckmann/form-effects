@@ -9,13 +9,13 @@ describe('createEffectAwareForm', () => {
         const effects = [cold('---|', {}), cold('---|', {})];
         const form$ = createEffectAwareForm(
             new FormGroup({}),
-            effects.map((effect) => () => effect)
+            effects.map(effect => () => effect)
         );
         form$.subscribe();
-        effects.forEach((effect) => expect(effect).toHaveSubscriptions('^--!'));
+        effects.forEach(effect => expect(effect).toHaveSubscriptions('^--!'));
     });
 
-    it('emits the form even though effects don\'t emit', async () => {
+    it("emits the form even though effects don't emit", async () => {
         const form = await createEffectAwareForm(new FormGroup({}), [
             () => NEVER,
         ])

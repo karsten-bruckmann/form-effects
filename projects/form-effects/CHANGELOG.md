@@ -9,40 +9,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Set peer dependencies to less strict range
-  - `@angular/forms` changed from `~12.2.16` to `^12.2.16`,
-  - `rxjs` changed from `~6.6.3` to `^6.6.3`
-- Fixed example code in readme
+-   Set peer dependencies to less strict range
+    -   `@angular/forms` changed from `~12.2.16` to `^12.2.16`,
+    -   `rxjs` changed from `~6.6.3` to `^6.6.3`
+-   Fixed example code in readme
 
 ## [12.0.0]
 
 ### Changed
 
-- Update to Angular 12
+-   Update to Angular 12
 
 ### Removed
 
-- Support for Angular 11
+-   Support for Angular 11
 
 ## [11.0.0]
 
 ### Changed
 
-- Update to Angular 11
+-   Update to Angular 11
 
 ### Removed
 
-- Support for Angular 10
+-   Support for Angular 10
 
 ## [10.0.0]
 
 ### Changed
 
-- Update to Angular 10
+-   Update to Angular 10
 
 ### Removed
 
-- Support for Angular 9
+-   Support for Angular 9
 
 ## [9.1.0]
 

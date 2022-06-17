@@ -1,8 +1,5 @@
 import { merge, Observable } from 'rxjs';
-import {
-    distinctUntilChanged,
-    shareReplay
-} from 'rxjs/operators';
+import { distinctUntilChanged, shareReplay } from 'rxjs/operators';
 
 import { FormGroup } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
