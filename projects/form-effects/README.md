@@ -70,7 +70,7 @@ For the effects to be run, the form returned by `createEffectAwareForm` needs to
 **Example**
 
 ```html
-<form *ngIf="form$ | async as form" [formControl]="form">
+<form *ngIf="form$ | async as form" [formGroup]="form">
     <input formControlName="foo" />
 </form>
 ```
