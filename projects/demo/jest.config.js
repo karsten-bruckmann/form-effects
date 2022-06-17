@@ -1,9 +1,10 @@
 module.exports = {
     preset: 'jest-preset-angular',
-    roots: ['<rootDir>/projects/form-effects'],
-    testMatch: ['<rootDir>/projects/form-effects/src/**/+(*.)+(spec).+(ts)'],
-    collectCoverage: true,
-    coverageReporters: ['html', 'lcov', 'json', 'text'],
-    coverageDirectory: '<rootDir>/coverage/form-effects',
+    roots: ['<rootDir>/projects/demo'],
+    testMatch: ['<rootDir>/projects/demo/src/**/+(*.)+(spec).+(ts)'],
+    collectCoverage: false,
     moduleFileExtensions: ['ts', 'html', 'js', 'json'],
+    moduleNameMapper: {
+        '@kbru/form-effects': '<rootDir>/projects/form-effects/src/public-api',
+    },
 };

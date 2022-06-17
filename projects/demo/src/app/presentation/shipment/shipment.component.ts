@@ -11,7 +11,7 @@ import {
 import { userDataSelector } from '../../core/state/user-data/user-data.selectors';
 
 @Component({
-    selector: 'kbru-shipment',
+    selector: 'demo-shipment',
     templateUrl: './shipment.component.html',
     styleUrls: ['./shipment.component.scss'],
 })
@@ -21,7 +21,7 @@ export class ShipmentComponent {
         private formBuilder: ShipmentFormBuilder
     ) {}
 
-    public form$ = this.formBuilder.form;
+    public form$ = this.formBuilder.build();
 
     public user$ = this.store$.select(userDataSelector);
 

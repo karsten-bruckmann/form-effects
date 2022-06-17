@@ -4,5 +4,5 @@
         "outDir": "../../out-tsc/spec",
         "types": ["jest", "node"]
     },
-    "include": ["**/*.spec.ts", "**/*.d.ts", "../form-effects/src/**/*.ts"]
+    "include": ["**/*.spec.ts", "**/*.d.ts"]
 }
