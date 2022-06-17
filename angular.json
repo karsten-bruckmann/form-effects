@@ -124,6 +124,14 @@
                             "projects/demo/**/*.html"
                         ]
                     }
+                },
+                "test": {
+                    "builder": "@angular-builders/jest:run",
+                    "options": {
+                        "main": ["jest-setup.ts"],
+                        "tsConfig": "tsconfig.spec.json",
+                        "no-cache": true
+                    }
                 }
             }
         }
