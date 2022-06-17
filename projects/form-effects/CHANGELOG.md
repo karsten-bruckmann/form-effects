@@ -22,7 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
-- Support for Angular 12
+- Support for Angular 11
 
 ## [11.0.0]
 
