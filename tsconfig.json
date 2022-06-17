@@ -10,11 +10,11 @@
     "module": "esnext",
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2015",
-    "lib": [
-      "es2018",
-      "dom"
-    ]
+    "target": "es5",
+    "lib": ["es2018", "dom"],
+    "paths": {
+      "form-effects": ["dist/form-effects/form-effects", "dist/form-effects"]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
