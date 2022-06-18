@@ -5,6 +5,17 @@ All notable changes to this library will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [12.1.0]
+
+### Added
+
+-   `potentiallyStableFormTestHelperAsync` \
+    Easier handling for form testing
+
+### Changed
+
+-   **Internal** Release/development workflows
+
 ## [12.0.1]
 
 ### Changed
@@ -56,9 +67,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
--   `distincValue`
--   `distincStatus`
+-   `distinctValue`
+-   `distinctStatus`
 
+[12.1.0]: https://github.com/karsten-bruckmann/form-effects/compare/v12.0.1...v12.1.0
 [12.0.1]: https://github.com/karsten-bruckmann/form-effects/compare/v12.0.0...v12.0.1
 [12.0.0]: https://github.com/karsten-bruckmann/form-effects/compare/v11.0.0...v12.0.0
 [11.0.0]: https://github.com/karsten-bruckmann/form-effects/compare/v10.0.0...v11.0.0
