@@ -1,8 +1,8 @@
 import { FormEffect } from '@kbru/form-effects';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { UserData } from '../../../state/user-data/user-data.model';
-import { FormGroup } from '../../../types/form-group.type';
+import { UserData } from '../../state/user-data/user-data.model';
+import { FormGroup } from '../../types/form-group.type';
 
 export const onUserDataChangedFormEffect =
     (userData$: Observable<UserData>): FormEffect<FormGroup> =>
