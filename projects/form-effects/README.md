@@ -22,15 +22,15 @@ A `FormEffect` is just a function getting the `FormGroup` and returning an `Obse
 let state$ = new BehaviourSubject<any>(null);
 
 // An effect that runs only once
-const setInitialValueEffect: FormEffect<FormGroup> = (form) => {
+const setInitialValueEffect: FormEffect<FormGroup> = form => {
     form.setValue(state$.value);
     return EMPTY;
 };
 
 // An effect that interacts with "external" data
-const saveOnChangeEffectA: FormEffect<FormGroup> = (form) =>
+const saveOnChangeEffectA: FormEffect<FormGroup> = form =>
     form.valueChanges.pipe(
-        map((value) => {
+        map(value => {
             state.next(value);
         })
     );
@@ -39,9 +39,9 @@ const saveOnChangeEffectA: FormEffect<FormGroup> = (form) =>
 // be mocked for testing.
 const saveOnChangeEffectB =
     (state$: BehaviourSubject<any>): FormEffect<FormGroup> =>
-    (form) =>
+    form =>
         form.valueChanges.pipe(
-            map((value) => {
+            map(value => {
                 state.next(value);
             })
         );
@@ -77,4 +77,6 @@ For the effects to be run, the form returned by `createEffectAwareForm` needs to
 
 ## Integration Tests for a form
 
-__TBD__
+Given you have your form set up only with effects and all logic completely independent from your components, you can easily write integration tests for your whole form logic.
+
+See [the tests in the demo app](https://github.com/karsten-bruckmann/form-effects/blob/main/projects/demo/src/app/core/form-builders/shipment/shipment.form-builder.spec.ts) for an example.
