@@ -11,8 +11,8 @@ import {
     CitiesNotLoaded,
     CITIES_LOADING,
     CITIES_NOT_LOADED,
-} from '../../../state/cities/cities.model';
-import { FormGroup } from '../../../types/form-group.type';
+} from '../../state/cities/cities.model';
+import { FormGroup } from '../../types/form-group.type';
 
 export const onZipCodeChangedFormEffect =
     (
