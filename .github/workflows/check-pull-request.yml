@@ -23,4 +23,4 @@ jobs:
                   node-version: 16
                   registry-url: https://registry.npmjs.org/
             - run: npm ci
-            - run: npx ng ${{ matrix.job }}
+            - run: npx ng run ${{ matrix.job }}
