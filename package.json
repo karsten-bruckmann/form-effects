@@ -19,7 +19,7 @@
         "@angular/platform-browser": "~12.2.16",
         "@angular/platform-browser-dynamic": "~12.2.16",
         "@angular/router": "~12.2.16",
-        "@kbru/control-props": "^12.0.1",
+        "@kbru/control-props": "^13.0.0",
         "@ngrx/effects": "^12.5.1",
         "@ngrx/store": "^12.5.1",
         "@ngrx/store-devtools": "^12.5.1",
