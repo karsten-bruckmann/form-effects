@@ -1,13 +1,6 @@
 import { FormGroup } from '@angular/forms';
-import { combineLatest, Observable } from 'rxjs';
-import {
-    debounceTime,
-    first,
-    mapTo,
-    startWith,
-    switchMap,
-    tap,
-} from 'rxjs/operators';
+import { combineLatest, firstValueFrom, Observable } from 'rxjs';
+import { debounceTime, first, mapTo, startWith, switchMap, tap } from 'rxjs/operators';
 
 interface Options<T> {
     /** Callback that will be used to setup the form. Assign values here, update your state, etc. */
@@ -25,9 +18,10 @@ interface Options<T> {
  */
 export const potentiallyStableFormTestHelper = <T extends FormGroup>(
     form$: Observable<T>,
-    options: Options<T> = {}
+    options: Options<T> = {},
 ): Observable<T> => {
-    const setupTest = options.setupTest || (() => {});
+    const setupTest = options.setupTest || (() => {
+    });
     const maxEffectsDuration = options.maxEffectsDuration || 1;
     let initialized = false;
     return form$.pipe(
@@ -44,8 +38,8 @@ export const potentiallyStableFormTestHelper = <T extends FormGroup>(
             combineLatest([
                 form.valueChanges.pipe(startWith(form.value)),
                 form.statusChanges.pipe(startWith(form.status)),
-            ]).pipe(debounceTime(maxEffectsDuration), mapTo(form))
-        )
+            ]).pipe(debounceTime(maxEffectsDuration), mapTo(form)),
+        ),
     );
 };
 
@@ -58,6 +52,6 @@ export const potentiallyStableFormTestHelper = <T extends FormGroup>(
  */
 export const potentiallyStableFormTestHelperAsync = <T extends FormGroup>(
     form$: Observable<T>,
-    options: Options<T> = {}
+    options: Options<T> = {},
 ): Promise<T> =>
-    potentiallyStableFormTestHelper(form$, options).pipe(first()).toPromise();
+    firstValueFrom(potentiallyStableFormTestHelper(form$, options).pipe(first()));
