@@ -2,7 +2,9 @@
   "name": "@kbru/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "create-release": "npx nx release --skip-publish && git push && git push --tags"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~18.2.0",
