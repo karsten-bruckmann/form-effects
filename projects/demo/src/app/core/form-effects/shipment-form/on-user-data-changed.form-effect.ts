@@ -2,29 +2,23 @@ import { FormEffect } from '@kbru/form-effects';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UserData } from '../../state/user-data/user-data.model';
-import { FormGroup } from '../../types/form-group.type';
+import { ShipmentFormGroup } from '../../form-builders/shipment/shipment.form-builder';
 
 export const onUserDataChangedFormEffect =
-    (userData$: Observable<UserData>): FormEffect<FormGroup> =>
+    (userData$: Observable<UserData>): FormEffect<ShipmentFormGroup> =>
     formGroup => {
-        const addressGroup = formGroup.get('address');
-        if (!addressGroup) {
-            throw new Error('address not in form');
-        }
-        const methodGroup = formGroup.get('method');
-        if (!methodGroup) {
-            throw new Error('method not in form');
-        }
+        const addressGroup = formGroup.controls.address;
+        const methodControl = formGroup.controls.method;
         return userData$.pipe(
             map(userData => {
                 if (null === userData) {
-                    addressGroup.setProp('visible', true);
-                    methodGroup.setProp('options', ['Standard']);
-                    methodGroup.setValue('Standard');
+                    addressGroup.visible = true;
+                    methodControl.options = ['Standard'];
+                    methodControl.setValue('Standard');
                 } else {
-                    addressGroup.setProp('visible', false);
+                    addressGroup.visible = false;
                     addressGroup.setValue(userData);
-                    methodGroup.setProp('options', ['Standard', 'Express']);
+                    methodControl.options = ['Standard', 'Express'];
                 }
             })
         );

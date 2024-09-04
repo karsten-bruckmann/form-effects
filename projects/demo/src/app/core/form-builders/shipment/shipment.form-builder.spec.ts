@@ -1,6 +1,6 @@
 import {
-    HttpClientTestingModule,
     HttpTestingController,
+    provideHttpClientTesting,
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import {
@@ -10,13 +10,15 @@ import {
 import { EffectsModule } from '@ngrx/effects';
 import { Store, StoreModule } from '@ngrx/store';
 import { first } from 'rxjs/operators';
-import { AppModule } from '../../../app.module';
 import { citiesMock } from '../../api-clients/cities.response';
 import {
     userLoggedIn,
     userLoggedOut,
 } from '../../state/user-data/user-data.actions';
-import { ShipmentFormBuilder } from './shipment.form-builder';
+import {
+    ShipmentFormBuilder,
+    ShipmentFormGroup,
+} from './shipment.form-builder';
 
 describe('ShipmentFormBuilder', () => {
     let httpTestingController: HttpTestingController;
@@ -28,8 +30,7 @@ describe('ShipmentFormBuilder', () => {
             imports: [
                 StoreModule.forRoot({}),
                 EffectsModule.forRoot([]),
-                AppModule,
-                HttpClientTestingModule,
+                provideHttpClientTesting(),
             ],
         });
 
@@ -59,10 +60,10 @@ describe('ShipmentFormBuilder', () => {
             maxEffectsDuration: 1,
         })
             .pipe(first())
-            .subscribe(form => {
+            .subscribe((form: ShipmentFormGroup) => {
                 // The form will be emitted as soon as the form is "stable". That means,
                 // the form value and status didn't change any more..
-                expect(form.get('address')?.prop('visible')).toEqual(true);
+                expect(form.controls.address.visible).toEqual(true);
                 done();
             });
     });
@@ -86,7 +87,7 @@ describe('ShipmentFormBuilder', () => {
             }
         );
 
-        expect(form.get('address')?.prop('visible')).toEqual(false);
+        expect(form.controls.address.visible).toEqual(false);
     });
 
     it('loads available cities from the api', async () => {
@@ -98,14 +99,13 @@ describe('ShipmentFormBuilder', () => {
                     httpTestingController
                         .expectOne('https://api.zippopotam.us/de/12435')
                         .flush(citiesMock('12435', ['Berlin', 'Foo']));
-                    expect(form.get('address.city')?.prop('options')).toEqual([
-                        'Berlin',
-                        'Foo',
-                    ]);
+                    expect(form.controls.address.controls.city.options).toEqual(
+                        ['Berlin', 'Foo']
+                    );
                 },
             }
         );
-        expect(form.get('address.city')?.prop('options')).toEqual([
+        expect(form.controls.address.controls.city.options).toEqual([
             'Berlin',
             'Foo',
         ]);

@@ -1,11 +1,11 @@
 import { merge, Observable } from 'rxjs';
 import { distinctUntilChanged, shareReplay } from 'rxjs/operators';
 
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 import { FormEffect } from './form-effect.type';
 
-export const createEffectAwareForm = <T extends FormGroup>(
+export const createEffectAwareForm = <T extends UntypedFormGroup>(
     control: T,
     effects: FormEffect<T>[]
 ): Observable<T> => {

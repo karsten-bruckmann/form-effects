@@ -9,7 +9,7 @@ export interface CitiesResponse {
             state: string;
             'state abbreviation': string;
             latitude: string;
-        }
+        },
     ];
 }
 

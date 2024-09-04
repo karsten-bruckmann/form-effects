@@ -1,13 +1,6 @@
-import { FormGroup } from '@angular/forms';
-import { combineLatest, Observable } from 'rxjs';
-import {
-    debounceTime,
-    first,
-    mapTo,
-    startWith,
-    switchMap,
-    tap,
-} from 'rxjs/operators';
+import { UntypedFormGroup } from '@angular/forms';
+import { combineLatest, Observable, firstValueFrom } from 'rxjs';
+import { debounceTime, mapTo, startWith, switchMap, tap } from 'rxjs/operators';
 
 interface Options<T> {
     /** Callback that will be used to setup the form. Assign values here, update your state, etc. */
@@ -23,11 +16,15 @@ interface Options<T> {
  * @param form$ The form you want to test
  * @param options
  */
-export const potentiallyStableFormTestHelper = <T extends FormGroup>(
+export const potentiallyStableFormTestHelper = <T extends UntypedFormGroup>(
     form$: Observable<T>,
     options: Options<T> = {}
 ): Observable<T> => {
-    const setupTest = options.setupTest || (() => {});
+    const setupTest =
+        options.setupTest ||
+        (() => {
+            return;
+        });
     const maxEffectsDuration = options.maxEffectsDuration || 1;
     let initialized = false;
     return form$.pipe(
@@ -56,8 +53,10 @@ export const potentiallyStableFormTestHelper = <T extends FormGroup>(
  * @param form$ The form you want to test
  * @param options
  */
-export const potentiallyStableFormTestHelperAsync = <T extends FormGroup>(
+export const potentiallyStableFormTestHelperAsync = <
+    T extends UntypedFormGroup,
+>(
     form$: Observable<T>,
     options: Options<T> = {}
 ): Promise<T> =>
-    potentiallyStableFormTestHelper(form$, options).pipe(first()).toPromise();
+    firstValueFrom(potentiallyStableFormTestHelper(form$, options));

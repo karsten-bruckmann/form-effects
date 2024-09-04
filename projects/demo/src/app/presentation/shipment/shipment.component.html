@@ -2,47 +2,48 @@
     <ng-container
         #loginButton
         *ngIf="(user$ | async) === null; else logoutButton">
-        <label>Already registered?</label>
+        <p>Already registered?</p>
         <button (click)="login()">Login</button>
     </ng-container>
     <ng-template #logoutButton>
-        <label *ngIf="user$ | async as user">
+        <p *ngIf="user$ | async as user">
             {{ user.fullName }}<br />
             {{ user.zipCode }} {{ user.city }}<br />
             {{ user.street }}
-        </label>
+        </p>
         <button (click)="logout()">Logout</button>
     </ng-template>
 </div>
 
 <ng-container *ngIf="form$ | async as form" [formGroup]="form">
-    <form *ngIf="form.prop('visible')">
+    <form *ngIf="form.visible">
         <ng-container
-            *ngIf="form.get('address')?.prop('visible')"
+            *ngIf="form.controls.address.visible"
             formGroupName="address">
             <h3>Shipping Address</h3>
 
             <div class="form-row">
-                <label>Full Name</label>
+                <p>Full Name</p>
                 <input formControlName="fullName" />
             </div>
 
             <div class="form-row">
-                <label>Zip Code</label>
+                <p>Zip Code</p>
                 <input formControlName="zipCode" />
             </div>
 
             <div class="form-row">
-                <label>City</label>
+                <p>City</p>
                 <select
                     formControlName="city"
                     *ngIf="
-                        form.get('address.city')?.prop('visible');
+                        form.controls.address.controls.city.visible;
                         else cityValue
                     ">
                     <ng-container
                         *ngIf="
-                            form.get('address.city')?.prop('options') as options
+                            form.controls.address.controls.city
+                                .options as options
                         ">
                         <option
                             *ngIf="
@@ -79,20 +80,15 @@
             </div>
 
             <div class="form-row">
-                <label>Street / No.</label>
+                <p>Street / No.</p>
                 <input formControlName="street" />
             </div>
         </ng-container>
 
-        <h3></h3>
-
         <div class="form-row">
-            <label>Method</label>
+            <p>Method</p>
             <div class="controls">
-                <label
-                    *ngFor="
-                        let option of form.get('method')?.prop('options') ?? []
-                    ">
+                <label *ngFor="let option of form.controls.method.options">
                     <input
                         [value]="option"
                         type="radio"
