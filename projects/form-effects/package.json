@@ -1,5 +1,5 @@
 {
-    "name": "form-effects",
+    "name": "@kbru/form-effects",
     "version": "18.0.0-rc.0",
     "peerDependencies": {
         "@angular/forms": "^18.2.0",
