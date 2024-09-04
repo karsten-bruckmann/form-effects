@@ -1,0 +1,36 @@
+:host {
+    display: block;
+    width: 100%;
+}
+
+h3 {
+    padding: 10px;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+
+    background: aliceblue;
+
+    & > label {
+        align-self: center;
+        width: 30%;
+    }
+
+    input:not([type='radio']),
+    select,
+    .controls {
+        align-self: center;
+        width: 65%;
+    }
+    .value {
+        width: 65%;
+        text-align: left;
+
+        &.disabled {
+            color: grey;
+        }
+    }
+}

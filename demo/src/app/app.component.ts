@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ShipmentComponent } from './presentation/shipment/shipment.component';
 
 @Component({
-  standalone: true,
-  imports: [NxWelcomeComponent, RouterModule],
-  selector: 'app-root',
+  selector: 'demo-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, ShipmentComponent],
 })
 export class AppComponent {
-  title = 'demo';
+  title = 'showcases-form';
 }
