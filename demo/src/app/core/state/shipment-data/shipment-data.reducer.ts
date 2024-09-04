@@ -3,17 +3,17 @@ import { ShipmentData } from './shipment-data.model';
 import { shipmentDataChangedAction } from './shipment-data.actions';
 
 export const shipmentDataReducer = createReducer<ShipmentData>(
-    {
-        address: {
-            fullName: '',
-            zipCode: '',
-            street: '',
-            city: '',
-        },
-        method: 'Standard',
+  {
+    address: {
+      fullName: '',
+      zipCode: '',
+      street: '',
+      city: '',
     },
-    on(shipmentDataChangedAction, (state, action) => ({
-        ...state,
-        ...action.data,
-    }))
+    method: 'Standard',
+  },
+  on(shipmentDataChangedAction, (state, action) => ({
+    ...state,
+    ...action.data,
+  }))
 );

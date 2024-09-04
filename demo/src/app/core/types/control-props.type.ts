@@ -1,4 +1,4 @@
 export interface ControlProps {
-    visible: boolean;
-    options?: string[];
+  visible: boolean;
+  options?: string[];
 }

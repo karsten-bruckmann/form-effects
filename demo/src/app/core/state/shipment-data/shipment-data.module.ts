@@ -4,11 +4,8 @@ import { ShipmentData } from './shipment-data.model';
 import { shipmentDataReducer } from './shipment-data.reducer';
 
 @NgModule({
-    imports: [
-        StoreModule.forFeature<ShipmentData>(
-            'delivery-data',
-            shipmentDataReducer
-        ),
-    ],
+  imports: [
+    StoreModule.forFeature<ShipmentData>('delivery-data', shipmentDataReducer),
+  ],
 })
 export class ShipmentDataModule {}

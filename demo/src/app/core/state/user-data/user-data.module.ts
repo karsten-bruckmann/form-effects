@@ -4,6 +4,6 @@ import { UserData } from './user-data.model';
 import { userDataReducer } from './user-data.reducer';
 
 @NgModule({
-    imports: [StoreModule.forFeature<UserData>('user-data', userDataReducer)],
+  imports: [StoreModule.forFeature<UserData>('user-data', userDataReducer)],
 })
 export class UserDataModule {}
