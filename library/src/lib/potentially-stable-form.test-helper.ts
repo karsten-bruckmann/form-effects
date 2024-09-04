@@ -27,7 +27,11 @@ export const potentiallyStableFormTestHelper = <T extends FormGroup>(
   form$: Observable<T>,
   options: Options<T> = {}
 ): Observable<T> => {
-  const setupTest = options.setupTest || (() => {});
+  const setupTest =
+    options.setupTest ||
+    (() => {
+      return;
+    });
   const maxEffectsDuration = options.maxEffectsDuration || 1;
   let initialized = false;
   return form$.pipe(
