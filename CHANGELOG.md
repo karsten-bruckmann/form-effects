@@ -1,3 +1,7 @@
+# 18.0.0 (2024-09-05)
+
+This was a version bump only, there were no code changes.
+
 ## 18.0.0-rc.10 (2024-09-05)
 
 This was a version bump only, there were no code changes.
