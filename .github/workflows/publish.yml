@@ -33,6 +33,10 @@ jobs:
         run: npx nx report
         shell: bash
 
+      - name: Build
+        run: npx run-many --all --targets build
+        shell: bash
+
       - name: Publish packages
         run: npx nx release publish
         shell: bash
