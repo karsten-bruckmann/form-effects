@@ -1,6 +1,6 @@
 {
   "name": "@kbru/form-effects",
-  "version": "18.0.0-rc.9",
+  "version": "18.0.0-rc.10",
   "peerDependencies": {
     "@angular/forms": "^18.2.0",
     "rxjs": "~7.8.0"
