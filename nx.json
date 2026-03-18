@@ -116,6 +116,6 @@
       "typeSeparator": "."
     }
   },
-  "packageManager": "yarn",
+  "packageManager": "npm",
   "analytics": false
 }
