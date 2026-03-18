@@ -1,99 +1,104 @@
 <div class="form-row">
-  <ng-container
-    #loginButton
-    *ngIf="(user$ | async) === null; else logoutButton"
-  >
-    <label>Already registered?</label>
-    <button (click)="login()">Login</button>
-  </ng-container>
-  <ng-template #logoutButton>
-    <label *ngIf="user$ | async as user">
-      {{ user.fullName }}<br />
-      {{ user.zipCode }} {{ user.city }}<br />
-      {{ user.street }}
-    </label>
+  @if ((user$ | async) === null) {
+    <ng-container
+      #loginButton
+      >
+      <label>Already registered?</label>
+      <button (click)="login()">Login</button>
+    </ng-container>
+  } @else {
+    @if (user$ | async; as user) {
+      <label>
+        {{ user.fullName }}<br />
+        {{ user.zipCode }} {{ user.city }}<br />
+        {{ user.street }}
+      </label>
+    }
     <button (click)="logout()">Logout</button>
-  </ng-template>
+  }
 </div>
 
-<ng-container *ngIf="form$ | async as form" [formGroup]="form">
-  <form *ngIf="form.visible">
-    <ng-container *ngIf="form.controls.address.visible" formGroupName="address">
-      <h3>Shipping Address</h3>
-
-      <div class="form-row">
-        <label>Full Name</label>
-        <input formControlName="fullName" />
-      </div>
-
-      <div class="form-row">
-        <label>Zip Code</label>
-        <input formControlName="zipCode" />
-      </div>
-
-      <div class="form-row">
-        <label>City</label>
-        <select
-          formControlName="city"
-          *ngIf="form.controls.address.controls.city.visible; else cityValue"
-        >
-          <ng-container
-            *ngIf="form.controls.address.controls.city.options as options"
-          >
-            <option
-              *ngIf="
-                !form.get('address.city')?.value &&
-                !!form.get('address.city')?.enabled
-              "
-              value=""
-            >
-              Please select...
-            </option>
-            <option
-              *ngIf="
-                !form.get('address.city')?.value &&
-                !!form.get('address.city')?.disabled
-              "
-              value=""
-            >
-              Please enter a valid zip code first
-            </option>
-            <option
-              *ngFor="let option of options"
-              [selected]="form.get('address.city')?.value === option"
-            >
-              {{ option }}
-            </option>
-          </ng-container>
-        </select>
-        <ng-template #cityValue>
-          <span
-            class="value"
-            [class.disabled]="form.get('address.city')?.disabled"
-            >{{ form.get('address.city')?.value }}</span
-          >
-        </ng-template>
-      </div>
-
-      <div class="form-row">
-        <label>Street / No.</label>
-        <input formControlName="street" />
-      </div>
+@if (form$ | async; as form) {
+  <ng-container [formGroup]="form">
+    @if (form.visible) {
+      <form>
+        @if (form.controls.address.visible) {
+          <ng-container formGroupName="address">
+            <h3>Shipping Address</h3>
+            <div class="form-row">
+              <label>Full Name</label>
+              <input formControlName="fullName" />
+            </div>
+            <div class="form-row">
+              <label>Zip Code</label>
+              <input formControlName="zipCode" />
+            </div>
+            <div class="form-row">
+              <label>City</label>
+              @if (form.controls.address.controls.city.visible) {
+                <select
+                  formControlName="city"
+                  >
+                  @if (form.controls.address.controls.city.options; as options) {
+                    @if (
+                      !form.get('address.city')?.value &&
+                      !!form.get('address.city')?.enabled
+                      ) {
+                      <option
+                        value=""
+                        >
+                        Please select...
+                      </option>
+                    }
+                    @if (
+                      !form.get('address.city')?.value &&
+                      !!form.get('address.city')?.disabled
+                      ) {
+                      <option
+                        value=""
+                        >
+                        Please enter a valid zip code first
+                      </option>
+                    }
+                    @for (option of options; track option) {
+                      <option
+                        [selected]="form.get('address.city')?.value === option"
+                        >
+                        {{ option }}
+                      </option>
+                    }
+                  }
+                </select>
+              } @else {
+                <span
+                  class="value"
+                  [class.disabled]="form.get('address.city')?.disabled"
+                  >{{ form.get('address.city')?.value }}</span
+                  >
+                }
+              </div>
+              <div class="form-row">
+                <label>Street / No.</label>
+                <input formControlName="street" />
+              </div>
+            </ng-container>
+          }
+          <h3></h3>
+          <div class="form-row">
+            <label>Method</label>
+            <div class="controls">
+              @for (option of form.controls.method.options ?? []; track option) {
+                <label>
+                  <input [value]="option" type="radio" formControlName="method" />
+                  {{ option }}
+                </label>
+              }
+            </div>
+          </div>
+        </form>
+      }
+      <button (click)="submit()">OK</button>
     </ng-container>
+  }
 
-    <h3></h3>
-
-    <div class="form-row">
-      <label>Method</label>
-      <div class="controls">
-        <label *ngFor="let option of form.controls.method.options ?? []">
-          <input [value]="option" type="radio" formControlName="method" />
-          {{ option }}
-        </label>
-      </div>
-    </div>
-  </form>
-  <button (click)="submit()">OK</button>
-</ng-container>
-
-<pre>{{ (form$ | async)?.value | json }}</pre>
+  <pre>{{ (form$ | async)?.value | json }}</pre>
