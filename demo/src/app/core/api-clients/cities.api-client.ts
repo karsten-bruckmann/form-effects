@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { map, Observable } from 'rxjs';
 import { CitiesResponse } from './cities.response';
 
 @Injectable({ providedIn: 'root' })
 export class CitiesApiClient {
-  constructor(private http: HttpClient) {}
+  private readonly http = inject(HttpClient);
 
   private baseUrl = 'https://api.zippopotam.us/de/';
 

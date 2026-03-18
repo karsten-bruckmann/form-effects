@@ -1,23 +1,23 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { firstValueFrom, Observable } from 'rxjs';
 import {
   ShipmentFormBuilder,
   ShipmentFormGroup,
 } from '../../core/form-builders/shipment/shipment.form-builder';
+import { CitiesModule } from '../../core/state/cities/cities.module';
 import { shipmentDataChangedAction } from '../../core/state/shipment-data/shipment-data.actions';
 import { ShipmentData } from '../../core/state/shipment-data/shipment-data.model';
+import { ShipmentDataModule } from '../../core/state/shipment-data/shipment-data.module';
 import {
   userLoggedIn,
   userLoggedOut,
 } from '../../core/state/user-data/user-data.actions';
-import { userDataSelector } from '../../core/state/user-data/user-data.selectors';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
-import { firstValueFrom, Observable } from 'rxjs';
 import { UserData } from '../../core/state/user-data/user-data.model';
-import { ShipmentDataModule } from '../../core/state/shipment-data/shipment-data.module';
 import { UserDataModule } from '../../core/state/user-data/user-data.module';
-import { CitiesModule } from '../../core/state/cities/cities.module';
+import { userDataSelector } from '../../core/state/user-data/user-data.selectors';
 
 @Component({
   selector: 'demo-shipment',
@@ -37,8 +37,11 @@ export class ShipmentComponent {
 
   public user$: Observable<UserData>;
 
-  constructor(private store$: Store, formBuilder: ShipmentFormBuilder) {
-    this.form$ = formBuilder.build();
+  private readonly store$ = inject(Store);
+  private readonly formBuilder = inject(ShipmentFormBuilder);
+
+  constructor() {
+    this.form$ = this.formBuilder.build();
     this.user$ = this.store$.select(userDataSelector);
   }
 

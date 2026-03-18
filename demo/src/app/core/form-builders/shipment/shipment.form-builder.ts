@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { createEffectAwareForm } from '@kbru/form-effects';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -7,13 +8,13 @@ import { onZipCodeChangedFormEffect } from '../../form-effects/shipment-form/on-
 import { loadCitiesRequested } from '../../state/cities/cities.actions';
 import { citiesSelector } from '../../state/cities/cities.selectors';
 import { userDataSelector } from '../../state/user-data/user-data.selectors';
-import { FormControl, FormGroup, AbstractControl } from '@angular/forms';
 
 class VisibilityAwareFormControl<T> extends FormControl<T | null> {
   public visible = true;
 }
 
 class VisibilityAwareFormGroup<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   T extends { [K in keyof T]: AbstractControl<any, any> }
 > extends FormGroup<T> {
   public visible = true;
@@ -35,7 +36,7 @@ export class ShipmentFormGroup extends VisibilityAwareFormGroup<{
 
 @Injectable({ providedIn: 'root' })
 export class ShipmentFormBuilder {
-  constructor(private store$: Store) {}
+  private readonly store$ = inject(Store);
 
   public build(): Observable<ShipmentFormGroup> {
     const form = new ShipmentFormGroup({
