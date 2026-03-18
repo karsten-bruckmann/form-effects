@@ -1,4 +1,3 @@
-import { FormGroup } from '@angular/forms';
 import { combineLatest, firstValueFrom, Observable } from 'rxjs';
 import {
   debounceTime,
@@ -8,6 +7,8 @@ import {
   switchMap,
   tap,
 } from 'rxjs/operators';
+
+import { Form } from './form.interface';
 
 interface Options<T> {
   /** Callback that will be used to setup the form. Assign values here, update your state, etc. */
@@ -23,7 +24,7 @@ interface Options<T> {
  * @param form$ The form you want to test
  * @param options
  */
-export const potentiallyStableFormTestHelper = <T extends FormGroup>(
+export const potentiallyStableFormTestHelper = <T extends Form>(
   form$: Observable<T>,
   options: Options<T> = {}
 ): Observable<T> => {
@@ -60,7 +61,7 @@ export const potentiallyStableFormTestHelper = <T extends FormGroup>(
  * @param form$ The form you want to test
  * @param options
  */
-export const potentiallyStableFormTestHelperAsync = <T extends FormGroup>(
+export const potentiallyStableFormTestHelperAsync = <T extends Form>(
   form$: Observable<T>,
   options: Options<T> = {}
 ): Promise<T> =>

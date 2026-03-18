@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
-import { FormGroup } from '@angular/forms';
 
-export type FormEffect<T extends FormGroup> = (
+import { Form } from './form.interface';
+
+export type FormEffect<T extends Form> = (
   formGroup: T
 ) => Observable<void>;
