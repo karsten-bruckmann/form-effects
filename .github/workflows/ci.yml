@@ -17,11 +17,15 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - run: npx nx-cloud start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="build"
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
+
       - run: npm ci --legacy-peer-deps
-      - uses: nrwl/nx-set-shas@v4
-      - run: npx nx affected -t lint test build
+
+      - name: Lint, test and build affected
+        env:
+          NX_DAEMON: false
+        run: npx nx affected -t lint test build
